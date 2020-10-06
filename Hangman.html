@@ -1,0 +1,162 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <title>Hangman</title>
+        <script src="jquery.js"></script>
+        <script src="jquery-3.2.1.min.js"></script>
+        <style>
+            .divider {
+                width:15px;
+                height:auto;
+                display:inline-block;
+            }
+
+            .home-line1 {
+                display: inline;
+            }
+
+            button {
+                background-color:#ff8000;
+            }
+
+            textarea {
+                width:25px;
+                height:30px;
+                display:inline-block;
+                text-align:center;
+                vertical-align: middle;
+                font-size: 16px;
+                border: none;
+                resize:none;
+                font-weight:bold;
+                text-decoration:underline;
+                text-transform:uppercase;
+            }
+
+            #Espace {
+                width:auto;
+                height:50px;
+            }
+
+            #EwBank {
+                width:500px;
+                height:100px;
+                vertical-align:top;
+            }
+        </style>
+        <script>
+            $(document).ready(function() {
+                $("#example").hide();
+                $("#bExample").hover(function() {
+                    $(this).focus();
+                    $(this).css("background-color", "#00cc99");
+                }, function(){
+                    $(this).css("background-color", "#ff8000");
+                });
+                $("#bExample").click(function () {
+                    $("#home").hide();
+                    $("#example").show();
+
+                    var fruit = ["my","favorite","fruit","is","strawberry"];
+                    localStorage.setItem("example", fruit);
+
+
+                    function brakeExWords() {
+                        var fragment = document.createDocumentFragment();
+                        for (var i = 0; i < fruit.length; i++) {
+                            var word = fruit[i];
+                            var word1 = word.toUpperCase();
+                                for (var k = 0; k < word1.length; k++) {
+                                    var res = word1.charAt(k);
+                                    var txtArea = document.createElement("TEXTAREA");
+                                    txtArea.setAttribute("placeholder", "_");
+                                    txtArea.setAttribute("maxlength", "1");
+                                    txtArea.setAttribute("id", "TxtE" + i + "" + k);
+                                    txtArea.addEventListener("change", verifyEx);
+//									txtarea.onchange = verifyEx;
+                                    fragment.appendChild(txtArea);
+                                }
+                                var d = document.createElement("DIV");
+                                d.setAttribute("class", "divider");
+                                fragment.appendChild(d);
+                        }
+                        printExLetter(fragment);
+                    }
+
+                    function printExLetter(fragment) {
+                        var box = document.getElementById("Ewords");
+                        box.appendChild(fragment);
+                    }
+
+                    brakeExWords();
+
+                });
+
+                function verifyEx() {
+                    var fruit = localStorage.getItem("example");
+                    var EwR = fruit.split(",");
+                    for (var i = 0; i < fruit.length; i++) {
+                        var Eword = EwR[i];
+                        var Eword1 = Eword.toUpperCase();
+                        for (var k = 0; k < Eword1.length; k++) {
+                            var exLetter = document.getElementById("TxtE" + i + "" + k);
+                            if (exLetter != null && exLetter != undefined && exLetter.value != "") {
+                                var res = Eword1.charAt(k);
+                                var v = exLetter.value;
+                                var eL = v.toUpperCase();
+                                if (res != eL) {
+                                    var wrong = document.createTextNode(eL + ", ");
+                                    var Ebank = document.getElementById("EwBank").value;
+                                    if (Ebank == "") {
+                                        var nEbank = eL + ", ";
+                                        document.getElementById("EwBank").value = nEbank;
+                                        exLetter.value =  "";
+                                        alert("Incorrect Lettter: " + eL + "!");
+                                    } else{
+                                        var nEbank = Ebank + eL + ", ";
+                                        document.getElementById("EwBank").value = nEbank;
+                                        exLetter.value =  "";
+                                        alert("Incorrect Lettter: " + eL + "!");
+                                    }
+                                } else {
+                                    continue;
+                                }
+                            } else {
+                                continue;
+                            }
+                        }
+                    }
+                }
+
+                $("#bPlay").hover(function() {
+                    $(this).focus();
+                    $(this).css("background-color", "#00cc99");
+                }, function(){
+                    $(this).css("background-color", "#ff8000");
+                });
+
+                $("#bMyWords").hover(function() {
+                    $(this).focus();
+                    $(this).css("background-color", "#00cc99");
+                }, function(){
+                    $(this).css("background-color", "#ff8000");
+                });
+
+            });
+        </script>
+    </head>
+    <body>
+    <div id="home">
+        <div id="Example" class="home-line1"><button id="bExample" value="Example">Example</button></div>
+        <div id="playG" class="home-line1"><button id="bPlay" value="Play!">Play!</button></div>
+        <div id="myWords" class="home-line1"><button id="bMyWords" value="My Words">My Words</button></div>
+        <div id="settings" class="home-line2"><button id="Bsettings">Setings</button></div>
+    </div>
+    <div id="example">
+        <div id="Ewords"></div>			<div id="Eman"></div>
+        <div id="Espace"></div>
+        <div id="Ebank"><input type="textarea" id="EwBank" value="" disabled></input></div>
+        <div id="Eback"><button id="EbBack" value="back">Back</button></div>
+    </div>
+    </body>
+</html>

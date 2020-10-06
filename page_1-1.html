@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<style>
+		#s1 {
+			margin: auto;
+			visibility:visible;
+		}
+		
+		#s2 {
+			margin: auto;
+			visibility:hidden;
+		}
+		
+		#s3 {
+			margin: auto;
+			visibility:hidden;
+		}
+		
+		#s4 {
+			margin: auto;
+		}
+		
+		table {
+			border-collapse: collapse;
+			width: 15%;
+			height: 260px;
+		}
+		
+		table, th, td {
+			text-align: center;
+			border: 7px solid black;
+			align-content: center;
+
+		}
+	</style>
+	<script>
+		var categories = ["Chips","Gum","Candy Bars"];
+		var cType = ["","Basic","complex"];
+		var cBopt = ["","Cheetos","Nacho Cheese Doritos","Cheezits"];
+		var cCopt = ["","Flamin' Hot Cheetos","Spicy Nacho Doritos","Cool Ranch Doritos"];
+		var gBrand = ["","Trident","Extra","Orbit"];
+		var gOpt = ["","Spearment","Sweetmint","Pepermint"];
+		var cbBrand = ["","Hershy","Milky Way","Kit-Kat"];
+		var cbHopt = ["","Cookies & Cream","Regular"];
+		var cbMopt = ["","Regular","Midnight","Simply Caremel"];
+		var cbKopt = ["","Regular","white Chocolate"];
+		var varList = [categories, cType, cBopt, cCopt, gBrand, gOpt, cbBrand, cbHopt, cbMopt, cbKopt];
+		var s1;
+		var s2;
+		var s3;
+		var s;
+		var p;
+		var ch;
+		var ca;
+		var pl1;
+		var pl2;
+		var pl3;
+		
+		function loadCats() {
+			for (ca = 0; ca < categories.length; ca++) {
+				p = document.createElement("OPTION")
+				var w = document.createTextNode(categories[ca])
+				p.appendChild(w)
+				document.getElementById('sel1').appendChild(p)
+			};
+		};
+		
+		function printChipType() {
+			//document.write("<option> </option>")
+			for (ch = 0; ch < cType.length; ch++) {
+				p = document.createElement("OPTION")
+				var  ch1 = document.createTextNode(cType[ch])
+				p.appendChild(ch1)
+				document.getElementById("sel2").appendChild(p)
+			};
+		};
+		
+		function printGumBrand() {
+			//document.write("<option> </option>")
+			for (var gu = 0; gu < gBrand.length; gu++) {
+				p = document.createElement("OPTION")
+				var  gu1 = document.createTextNode(gBrand[gu])
+				p.appendChild(gu1)
+				document.getElementById("sel2").appendChild(p)
+			};
+		};
+		
+		function printCandyBrand() {
+			for (cbB = 0; cbB < cbBrand.length; cbB++) {
+				p = document.createElement("OPTION")
+				var  cb1 = document.createTextNode(cbBrand[cbB])
+				p.appendChild(cb1)
+				document.getElementById("sel2").appendChild(p)
+			};
+		}
+		
+		function chipBasic() {
+			for (var chipB = 0; chipB < cBopt.length; chipB++) {
+				p = document.createElement("OPTION")
+				var  chipB1 = document.createTextNode(cBopt[chipB])
+				p.appendChild(chipB1)
+				document.getElementById("sel3").appendChild(p)
+			};
+		}
+		
+		function chipComplex() {
+			for (var chipC = 0; chipC < cCopt.length; chipC++) {
+				p = document.createElement("OPTION")
+				var  chipC1 = document.createTextNode(cCopt[chipC])
+				p.appendChild(chipC1)
+				document.getElementById("sel3").appendChild(p)
+			};
+		}
+		
+		function gumFlav() {
+			for (var gumF = 0; gumF < gOpt.length; gumF++) {
+				p = document.createElement("OPTION")
+				var  gumFlav = document.createTextNode(gOpt[gumF])
+				p.appendChild(gumFlav)
+				document.getElementById("sel3").appendChild(p)
+			};
+		}
+		
+		function hershType() {
+			for (var hershT = 0; hershT < cbHopt.length; hershT++) {
+				p = document.createElement("OPTION")
+				var  hersT = document.createTextNode(cbHopt[hershT])
+				p.appendChild(hersT)
+				document.getElementById("sel3").appendChild(p)
+			};
+		}
+		
+		function mwType() {
+			for (var mwT = 0; mwT < cbMopt.length; mwT++) {
+				p = document.createElement("OPTION")
+				var  mWt1 = document.createTextNode(cbMopt[mwT])
+				p.appendChild(mWt1)
+				document.getElementById("sel3").appendChild(p)
+			};
+		}
+		
+		function kkType() {
+			for (var kkT = 0; kkT < cbKopt.length; kkT++) {
+				p = document.createElement("OPTION")
+				var  kKt1 = document.createTextNode(cbKopt[kkT])
+				p.appendChild(kKt1)
+				document.getElementById("sel3").appendChild(p)
+			};
+		}
+		
+		function ifelseCall1() {
+			s1 = document.getElementById("sel1")
+			s2 = document.getElementById("sel2")
+			document.getElementById('s2').style.visibility = "visible";
+			while (s2.hasChildNodes()) {   
+				   s2.removeChild(s2.firstChild);
+			}
+			if (s1.selectedIndex == 1){
+				printChipType();
+			}else if (s1.selectedIndex == 2){
+				printGumBrand();
+			}else if (s1.selectedIndex == 3){
+				printCandyBrand();
+			}else{
+				alert("Nope.avi")
+			}
+		};
+		
+		function ifelseCall2() {
+			s2 = document.getElementById('sel2')
+			s3 = document.getElementById("sel3")
+			document.getElementById('s3').style.visibility = "visible";
+			while (s3.hasChildNodes()) {   
+				   s3.removeChild(s3.firstChild);
+			}
+			if (s2.selectedIndex == 1 && s1.selectedIndex == 1){
+				chipBasic()
+			}else if (s2.selectedIndex == 2 && s1.selectedIndex == 1){
+				chipComplex()
+			}else if (s1.selectedIndex == 2){
+				gumFlav()
+			}else if (s2.selectedIndex == 1 && s1.selectedIndex == 3){
+				hershType()
+			}else if (s2.selectedIndex == 2 && s1.selectedIndex == 3){
+				mwType()
+			}else if (s2.selectedIndex == 3 && s1.selectedIndex == 3){
+				kkType()
+			}else{
+				alert("Pootis!")
+			}
+		};
+		
+		function printOrder() {
+			s1 = document.getElementById("sel1").value;
+			s2 = document.getElementById("sel2").value;
+			s3 = document.getElementById("sel3").value;
+			var g = s1 + ", " + s2 + ", " + s3;
+			s4 = document.getElementById("sel4").setAttribute("value", g);
+		}
+
+	</script>
+	</head>
+	<body onload="loadCats()">
+		<table id="VM" align="center">
+			<th>Vending Machine</th>
+				<tr><td><div id="s1"><select onchange="ifelseCall1()" name="sel1" id='sel1'><option> </option></select></div></td></tr>
+				<form id='VM1'>
+					<tr><td><div id="s2"><select onchange="ifelseCall2()" name="sel2" id='sel2'><option> </option></select></div></td></tr>
+					<tr><td><div id="s3"><select onChange="printOrder()" name="sel3" id='sel3'><option> </option></select></div></td></tr>
+			</form>
+			<tr><td><div id="s4">Your Order:<input type="text" value="" id="sel4" disabled></input></div></td></tr>
+		</table>
+	</body>
+</html>
