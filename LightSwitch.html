@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Light Switch</title>
+        <style>
+
+        </style>
+        <script>
+            const on = "on.jpg", off = "off.jpg";
+
+            function switchLight() {
+            var img = document.getElementsByTagName("img");
+                if (img[0].src == "off.jpg") {
+                    img[0].src = "on.jpg";
+                    img[1].setAttribute("class", "sOn");
+                } else {
+                    img[0].src = "off.jpg";
+                    img[1].setAttribute("class", "sOff");
+                }
+            }
+
+        </script>
+    </head>
+    <body>
+        <div id="bulb">
+            <img src="off.jpg"/>
+        </div>
+        <div id="switch">
+            <img src="switch.png" onclick="switchLight()"/>
+        </div>
+    </body>
+</html>
