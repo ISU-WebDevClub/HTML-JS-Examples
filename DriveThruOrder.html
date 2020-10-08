@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>Drive Through</title>
+        <style>
+
+        </style>
+        <script>
+            var options = ["Hamburger", "Cheeseburger", "Shake", "Drink", "Fries"];
+            var prices = [3.50, 3.75, 2.50, 1.00, 1.50];
+
+            function setOptions() {
+                var optionsBox = document.getElementById("options");
+                var txtArea = document.createElement("textarea");
+
+                for (var i = 0; i < options.length; i++) {
+                    txtArea.value = options[i];
+                }
+
+                optionsBox.appendChild(txtArea);
+            }
+        </script>
+    </head>
+    <body onload="setOptions()">
+        <div id=options>
+
+        </div>
+        <div id=order>
+
+        </div>
+        <div id=receipt>
+
+        </div>
+    </body>
+</html>

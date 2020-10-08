@@ -4,18 +4,24 @@
         <meta charset="UTF-8">
         <title>Light Switch</title>
         <style>
-
+            #bulb {
+                width: 67;
+                height: 103;
+            }
+            .sOn {
+                transform: rotate(180deg);
+            }
         </style>
         <script>
-            const on = "on.jpg", off = "off.jpg";
+            const on = "file:///D:/Programming/Repositories/HTML-JS-Examples/on.jpg", off = "file:///D:/Programming/Repositories/HTML-JS-Examples/off.jpg";
 
             function switchLight() {
-            var img = document.getElementsByTagName("img");
-                if (img[0].src == "off.jpg") {
-                    img[0].src = "on.jpg";
+                var img = document.getElementsByTagName("img");
+                if (img[0].currentSrc == off) {
+                    img[0].src = on;
                     img[1].setAttribute("class", "sOn");
                 } else {
-                    img[0].src = "off.jpg";
+                    img[0].src = off;
                     img[1].setAttribute("class", "sOff");
                 }
             }
@@ -24,7 +30,7 @@
     </head>
     <body>
         <div id="bulb">
-            <img src="off.jpg"/>
+            <img src="D:\Programming\Repositories\HTML-JS-Examples\off.jpg"/>
         </div>
         <div id="switch">
             <img src="switch.png" onclick="switchLight()"/>
