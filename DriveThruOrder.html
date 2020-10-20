@@ -5,18 +5,36 @@
 
         </style>
         <script>
-            var options = ["Hamburger", "Cheeseburger", "Shake", "Drink", "Fries"];
-            var prices = [3.50, 3.75, 2.50, 1.00, 1.50];
+            var options = ["Hamburger", "Cheeseburger", "Tenderloin", "Shake", "Drink", "Fries"];
+            var prices = [3.50, 3.75, 5.00, 2.50, 1.00, 1.50];
 
             function setOptions() {
                 var optionsBox = document.getElementById("options");
-                var txtArea = document.createElement("textarea");
 
                 for (var i = 0; i < options.length; i++) {
-                    txtArea.value = options[i];
+                    var txtNode1 = document.createTextNode(options[i] + "  $" + prices[i].toString());
+                    var p = document.createElement("p");
+                    p.appendChild(txtNode1);
+                    optionsBox.appendChild(p);
+                }
+            }
+
+            function printReceipt() {
+                var order = document.getElementById("order");
+                var i = 0;
+
+                while (i <= options.length) {
+                    if (order.value == options[i]) {
+                        var txt = document.createTextNode(order.value + " $" + prices[i].toString());
+                        var div = document.createElement("div");
+                        div.appendChild(txt);
+                        document.getElementById("receipt").appendChild(div);
+                        break;
+                    }
+                    i++;
                 }
 
-                optionsBox.appendChild(txtArea);
+                document.getElementById("order").value = "";
             }
         </script>
     </head>
@@ -24,8 +42,9 @@
         <div id=options>
 
         </div>
-        <div id=order>
-
+        <div id=in>
+            <input id=order type=text placeholder="Tenderloin"></input>
+            <button type="submit" id=submit onclick="printReceipt()" value="Submit">Submit</button>
         </div>
         <div id=receipt>
 

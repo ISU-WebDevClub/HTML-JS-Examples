@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <title>Drive Through</title>
+        <style>
+            div {
+                margin: 10px;
+                
+            }
+            textarea {
+                height: 100px;
+                background-color: lightgrey;
+            }
+            span {
+                min-width: 48px;
+                margin: 2px;
+            }
+
+            #receipt {
+                all: initial;
+                border: black 3px solid;
+                width: 200px;
+                display: inline-block;
+                overflow-x: auto;
+                white-space: nowrap;
+                min-height: 10px;
+            }
+            #orderPanel {
+                position: fixed; top: 20%; left: 50%;
+            }
+
+            .panel {
+                display: inline-block;
+            }
+        </style>
+        <script>
+            var options = ["Hamburger", "Cheeseburger", "Tenderloin", "Shake", "Drink", "Fries"];
+            var prices = [3.50, 3.75, 5.00, 2.50, 1.00, 1.50];
+            var sum = 0;
+
+            function setOptions() {
+                var optionsBox = document.getElementById("options");
+                var txtArea = document.createElement("textarea");
+
+                for (var i = 0; i < options.length; i++) {
+                    if (i == options.length - 1) {
+                        var tn = document.createTextNode(options[i] + " $" + prices[i].toString());
+                    } else {
+                        var tn = document.createTextNode(options[i] + " $" + prices[i].toString() + "\n");
+                    }
+                    txtArea.appendChild(tn);
+                    
+                }
+                txtArea.setAttribute("readonly", true);
+                optionsBox.appendChild(txtArea);
+            }
+
+            function printReceipt() {
+                var order = document.getElementById("order");
+
+                for (var i = 0; i < options.length; i++) {
+                    if (order.value == options[i]) {
+                        var span1 = document.createElement("span");
+                        var span = document.createElement("span");
+
+                        var item = document.createTextNode(order.value);
+                        var price = document.createTextNode("$" + prices[i].toString());
+
+                        var a = prices[i];
+                        sum += a;
+
+                        span1.appendChild(item);
+                        span.appendChild(price);
+                        document.getElementById("total").removeChild(document.getElementById("total").firstChild);
+
+                        document.getElementById("receipt").appendChild(span1);
+                        document.getElementById("receipt").appendChild(span);
+                        document.getElementById("receipt").appendChild(document.createElement("br"));
+                        document.getElementById("total").appendChild(document.createTextNode("$" + sum.toString()));
+                        break;
+                    }
+                }
+
+                order.value = "";
+            }
+        </script>
+    </head>
+    <body onload="setOptions()">
+        <div id=orderPanel class=panel>
+            <p>Menu:</p>
+            <div id=options>
+
+            </div>
+            <p>Order Here:</p>
+            <div id=in>
+                <input id=order type=text placeholder="Tenderloin"></input>
+                <button type="submit" id=submit onclick="printReceipt()" value="Submit">Submit</button>
+            </div>
+            <p>Receipt:</p>
+            <div id=receipt>
+                
+
+            </div>
+            <p>Total: </p>
+            <span id=total style=all:unset;>
+
+            </span>
+        </div>
+    </body>
+</html>
