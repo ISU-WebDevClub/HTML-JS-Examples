@@ -2,7 +2,11 @@
     <head>
         <title>Drive Through</title>
         <style>
-
+            .panel {
+                position: fixed; top: 20%; left: 40%;
+                border: blue dashed 84px;
+                font-family: "Comic Sans MS", "Comic Sans", cursive;
+            }
         </style>
         <script>
             var options = ["Hamburger", "Cheeseburger", "Tenderloin", "Shake", "Drink", "Fries"];
@@ -39,15 +43,17 @@
         </script>
     </head>
     <body onload="setOptions()">
-        <div id=options>
+        <div id=panel class=panel>
+            <div id=options>
 
-        </div>
-        <div id=in>
-            <input id=order type=text placeholder="Tenderloin"></input>
-            <button type="submit" id=submit onclick="printReceipt()" value="Submit">Submit</button>
-        </div>
-        <div id=receipt>
+            </div>
+            <div id=in>
+                <input id=order type=text placeholder="Tenderloin" style="font-family: 'Comic Sans MS', 'Comic Sans', cursive;"></input>
+                <button type="submit" id=submit onclick="printReceipt()" value="Submit">Submit</button>
+            </div>
+            <div id=receipt>
 
+            </div>
         </div>
     </body>
 </html>

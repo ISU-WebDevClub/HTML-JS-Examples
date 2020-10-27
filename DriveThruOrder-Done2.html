@@ -29,9 +29,13 @@
             }
 
             .panel {
+                all: inherit;
                 display: inline-block;
+                border: violet 7px dotted;
+                font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             }
         </style>
+        <script src="jquery.js"></script>
         <script>
             var options = ["Hamburger", "Cheeseburger", "Tenderloin", "Shake", "Drink", "Fries"];
             var prices = [3.50, 3.75, 5.00, 2.50, 1.00, 1.50];
@@ -82,9 +86,11 @@
 
                 order.value = "";
             }
+
+            $(document.body).ready("setOptions()");
         </script>
     </head>
-    <body onload="setOptions()">
+    <body >
         <div id=orderPanel class=panel>
             <p>Menu:</p>
             <div id=options>
