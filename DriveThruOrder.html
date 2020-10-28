@@ -4,23 +4,31 @@
         <style>
             .panel {
                 position: fixed; top: 20%; left: 40%;
-                border: blue dashed 84px;
+                border: blue solid 84px;
                 font-family: "Comic Sans MS", "Comic Sans", cursive;
             }
         </style>
         <script>
             var options = ["Hamburger", "Cheeseburger", "Tenderloin", "Shake", "Drink", "Fries"];
             var prices = [3.50, 3.75, 5.00, 2.50, 1.00, 1.50];
+            var total = 0;
 
             function setOptions() {
                 var optionsBox = document.getElementById("options");
+                var totalBox = document.createElement("div");
+                totalBox.setAttribute("id", "totalCost");
+                var span = document.createElement("span");
+                span.setAttribute("id", "idea")
+                document.getElementById("receipt").appendChild(document.createTextNode("Total: "));
+                document.getElementById("receipt").appendChild(span);
 
                 for (var i = 0; i < options.length; i++) {
-                    var txtNode1 = document.createTextNode(options[i] + "  $" + prices[i].toString());
+                    var txtNode1 = document.createTextNode(options[i] + "  $" + prices[i].toFixed(2));
                     var p = document.createElement("p");
                     p.appendChild(txtNode1);
                     optionsBox.appendChild(p);
                 }
+                document.getElementById("receipt").appendChild(totalBox);
             }
 
             function printReceipt() {
@@ -29,10 +37,14 @@
 
                 while (i <= options.length) {
                     if (order.value == options[i]) {
-                        var txt = document.createTextNode(order.value + " $" + prices[i].toString());
+                        var txt = document.createTextNode(order.value + " $" + prices[i].toFixed(2));
                         var div = document.createElement("div");
+                        document.getElementById("idea").remove();
+                        total += prices[i];
+                        totStr = document.createTextNode("$" + total.toFixed(2));
+                        document.getElementById("idea").appendChild(totStr);
                         div.appendChild(txt);
-                        document.getElementById("receipt").appendChild(div);
+                        document.getElementById("receipt").insertBefore(div, document.getElementById("idea"));
                         break;
                     }
                     i++;
